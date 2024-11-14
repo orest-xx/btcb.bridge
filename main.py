@@ -1,16 +1,8 @@
-import json
 import random
 import asyncio
+from settings import *
 from web3 import AsyncWeb3
 from web3.providers.async_rpc import AsyncHTTPProvider
-
-with open('abi/router_abi.json') as f:
-    router_abi = json.load(f)
-with open('abi/btc_b_abi.json') as f:
-    btc_b_abi = json.load(f)
-
-START = 90
-END = 360
 
 
 class Chain():
@@ -183,7 +175,7 @@ async def work(wallet):
         to_chain = ChainFactory.create_chain(to_chain_name)
         print(f'For wallet: {address} bridge goes from: {from_chain.chain_name} to: {to_chain.chain_name} ')
 
-        # Use random start delay between 60 and 390 seconds
+        # Use random start delay between start and end seconds
         start_delay = random.randint(START, END)
         print(f'For wallet: {address} delay: {start_delay} ')
         await asyncio.sleep(start_delay)
